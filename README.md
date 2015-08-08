@@ -35,22 +35,36 @@ This class will help you to access your firebase.
 			}
 		}
 
-## Step 5 - Let's create our login helper
+## Step 5 - Make Login
+
+### Create login activity
+Just create an activity with two `EditText` and two `Buttons`.
+It should be like.
+
+		Email
+		Password
+		Login
+		Signin
+
+Make a `clickListener` for login and signin.
+
+### Let's create our login helper
 This will manage logins and signups.
 So, there's a lot of code here then I'll only show the main part of it.
 They work with a listener, that will be called when we got some response.
 
-### To login
+#### To login
 When user click on login call this
 
 		firebase.authWithPassword(email, password, new AuthResultHandler());
 
-### To register
+#### To register
 When user click on signup, call this
 
 		firebase.createUser(email, password, new SignUpResultHandler());
 
-### Callback sample
+#### Callback sample
+The method name is diferent, but the idea is the same.
 
 		class SignUpResultHandler implements Firebase.ResultHandler {
 
@@ -66,8 +80,25 @@ When user click on signup, call this
 		}
 
 
-## Step 6 - 
+## Step 6 - Let's create a Chat Activity
+
+### Send message
+
+### Get the messages back
+
+### Create one Adapter
+
+### Create chat Layout
+
+### Create Item Layout
+
+### Activity
+
+### Connect everything
 
 
+# TODOs
+
+We need to create a profile.
 
 
