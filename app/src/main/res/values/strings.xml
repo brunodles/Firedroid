@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FireDroid</string>
+    <string name="login_error">Wrong email or password</string>
+</resources>
