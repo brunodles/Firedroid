@@ -2,7 +2,7 @@
 
 In this tutorial we will make an chat app with firebase.
 
-## step 1 - Import firebase on `app/build.gradle`
+## Step 1 - Import firebase on `app/build.gradle`
 In `dependencies` put this line below and then run *Gradle Sync*.
 This will download firba base client api for your project.
 
@@ -83,22 +83,76 @@ The method name is diferent, but the idea is the same.
 ## Step 6 - Let's create a Chat Activity
 
 ### Send message
+To send a message is simple, we need to get you root firebase reference and move to **messages**.
+Then we'll **push** one new reference, like a list.
+Place the message on it.
+
+		messages = firebaseRoot.child("messages");
+		message = messages.push();
+		message.child("author").setValue(firebaseRoot.getAuth().getUid());
+		message.child("message").setValue(mMessage.getText().toString());
 
 ### Get the messages back
+To get our messages back, we create a listener for **messages**.
+		
+		firebaseRoot.child("messages").addChildEventListener(new ChildEventListener() {
+			@Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+				// when a new child is pushed it will apear here.
+			}
 
-### Create one Adapter
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+				// when a child is changed it will apear here
+			}
 
-### Create chat Layout
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+				// when a child is removed
+			}
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+				// when a child is moved to anoter position
+			}
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+				// when the request is cacelled
+			}
+		}
 
 ### Create Item Layout
+The most simple layout, don't even need to bre created because the default android layout already have a similar layout fot that. But we will put here just to personalize it. So it's just a `LinarLayout` with two `TextView`s. The first one for the author and the second one for the message.  
+Later we can add a photo and/or timestamp here.
 
-### Activity
+### Create one Adapter
+Well you already know how to get the childs, now how to create a adapter?  
+Just need to put one `addChildEventListener` for **messages** inside the adapter.
+Start listeneing on adapter constructor.
+Make that adapter have a `List` of **messages** and `String`.  
+That String list will keep the keys for each object.  
+Just to remember, this apdater will use the item layout above.
 
-### Connect everything
+### Create Chat Layout
+The chat layout is simple, we just need to make a `LinearLayout` with a `ListView`, `EditText` and a `Button`.
+ListView will have show the messages.
+EditText will let users write their messages to he others.
+Button will send the message.
 
+### Chat Activity
+The activity must use the Chat Layout.
+Use the adapter that we created on `listview`.
+When click on send button call the send method we created above.
+
+## Step 7 - Let's have fun
+That's it!  
+Just send to your friend a enjoy.  
+Questions, suggestions and improvements are welcome.  
 
 # TODOs
+* Create a user profile.
+* Timestamp on message
 
-We need to create a profile.
 
 
